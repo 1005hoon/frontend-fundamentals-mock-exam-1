@@ -1,3 +1,4 @@
+import { getCalculationResultFromSavingsProduct } from 'domains/calculationResult/getCalculationResultFromSavingsProduct';
 import z from 'zod';
 
 const SavingsGoalSchema = z.object({
@@ -7,3 +8,6 @@ const SavingsGoalSchema = z.object({
 });
 
 export type SavingsGoal = z.infer<typeof SavingsGoalSchema>;
+export const SavingsGoal = Object.assign(SavingsGoalSchema, {
+  getCalculationResultFromSavingsProduct,
+});
