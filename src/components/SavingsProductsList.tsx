@@ -1,24 +1,24 @@
+import { useMemo } from 'react';
+import { ListRow } from 'tosslib';
+
 import { SavingsProduct } from 'domains/savingsProduct/SavingsProduct';
 import type { SavingsGoal } from 'domains/savingsGoal/SavingsGoal';
 
 import { SavingsProductItem } from './SavingsProductItem';
-import { useEffect, useMemo, useState } from 'react';
-import { fetchSavingsProducts } from 'data/savingsProducts';
-import { ListRow } from 'tosslib';
 
-interface SavingsProductsContainerProps {
+interface SavingsProductsListProps {
+  savingsProducts: SavingsProduct[];
   selectedSavingsProduct: SavingsProduct | null;
   savingsGoal: SavingsGoal;
   onSelectProduct: (product: SavingsProduct) => void;
 }
 
-export function SavingsProductsContainer({
+export function SavingsProductsList({
+  savingsProducts,
   selectedSavingsProduct,
   savingsGoal,
   onSelectProduct,
-}: SavingsProductsContainerProps) {
-  const [savingsProducts, setSavingsProducts] = useState<SavingsProduct[]>([]);
-
+}: SavingsProductsListProps) {
   const availableSavingsProducts = useMemo(
     () => savingsProducts.filter(product => SavingsProduct.verifySavingsProductMatchesGoal(product, savingsGoal)),
     [savingsProducts, savingsGoal]
@@ -27,10 +27,6 @@ export function SavingsProductsContainer({
   const handleClick = (product: SavingsProduct) => {
     onSelectProduct(product);
   };
-
-  useEffect(() => {
-    fetchSavingsProducts().then(setSavingsProducts);
-  }, []);
 
   return availableSavingsProducts.length === 0 ? (
     <NoAvailableProducts />
