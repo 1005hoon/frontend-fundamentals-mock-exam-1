@@ -1,18 +1,18 @@
 import { SavingsProduct } from 'domains/savingsProduct/SavingsProduct';
+import type { SavingsGoal } from 'domains/savingsGoal/SavingsGoal';
 
 import { SavingsProductItem } from './SavingsProductItem';
 import { useEffect, useMemo, useState } from 'react';
 import { fetchSavingsProducts } from 'data/savingsProducts';
-import { SavingsGoal } from 'domains/savingsGoal/SavingsGoal';
 
 interface SavingsProductsContainerProps {
-  selectedSavingsProductId: string | null;
+  selectedSavingsProduct: SavingsProduct | null;
   savingsGoal: SavingsGoal;
-  onSelectProduct: (productId: string) => void;
+  onSelectProduct: (product: SavingsProduct) => void;
 }
 
 export function SavingsProductsContainer({
-  selectedSavingsProductId,
+  selectedSavingsProduct,
   savingsGoal,
   onSelectProduct,
 }: SavingsProductsContainerProps) {
@@ -23,8 +23,8 @@ export function SavingsProductsContainer({
     [savingsProducts, savingsGoal]
   );
 
-  const handleClick = (id: string) => {
-    onSelectProduct(id);
+  const handleClick = (product: SavingsProduct) => {
+    onSelectProduct(product);
   };
 
   useEffect(() => {
@@ -38,8 +38,8 @@ export function SavingsProductsContainer({
       <SavingsProductItem
         key={product.id}
         savingsProduct={product}
-        onClick={() => handleClick(product.id)}
-        isChecked={selectedSavingsProductId === product.id}
+        onClick={() => handleClick(product)}
+        isChecked={selectedSavingsProduct?.id === product.id}
       />
     ))
   );
