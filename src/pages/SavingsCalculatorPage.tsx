@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Border, colors, ListHeader, ListRow, NavigationBar, Spacing } from 'tosslib';
+import { Border, NavigationBar, Spacing } from 'tosslib';
 
 import type { SavingsGoal } from 'domains/savingsGoal/SavingsGoal';
 import type { SavingsProduct } from 'domains/savingsProduct/SavingsProduct';
