@@ -4,8 +4,10 @@ import { Assets, Border, colors, ListRow, NavigationBar, Spacing, Tab } from 'to
 import type { SavingsGoal } from 'domains/savingsGoal/SavingsGoal';
 
 import SavingsGoalForm from 'components/SavingsGoalForm';
+import { SavingsCalculatorTabs } from 'components/SavingsCalculatorTabs';
 
 export function SavingsCalculatorPage() {
+  const [tab, setTab] = useState<'SAVING_PRODUCTS' | 'CALCULATION_RESULT'>('SAVING_PRODUCTS');
   const [savingsGoal, setSavingsGoal] = useState<SavingsGoal>({
     targetAmount: 0,
     monthlyAmount: 0,
@@ -20,15 +22,7 @@ export function SavingsCalculatorPage() {
       <Spacing size={24} />
       <Border height={16} />
       <Spacing size={8} />
-
-      <Tab onChange={() => {}}>
-        <Tab.Item value="products" selected={true}>
-          적금 상품
-        </Tab.Item>
-        <Tab.Item value="results" selected={false}>
-          계산 결과
-        </Tab.Item>
-      </Tab>
+      <SavingsCalculatorTabs tab={tab} onChange={setTab} />
 
       <ListRow
         contents={
