@@ -1,4 +1,5 @@
 import z from 'zod';
+import { verifySavingsProductMatchesGoal } from './verifySavingsProductMatchesGoal';
 
 const SavingsProductSchema = z.object({
   id: z.string(),
@@ -10,3 +11,6 @@ const SavingsProductSchema = z.object({
 });
 
 export type SavingsProduct = z.infer<typeof SavingsProductSchema>;
+export const SavingsProduct = Object.assign(SavingsProductSchema, {
+  verifySavingsProductMatchesGoal,
+});
