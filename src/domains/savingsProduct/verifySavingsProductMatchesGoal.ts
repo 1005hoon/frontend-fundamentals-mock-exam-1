@@ -5,7 +5,10 @@ export function verifySavingsProductMatchesGoal(savingsProduct: SavingsProduct, 
   const isMonthlyAmountValid =
     savingsProduct.minMonthlyAmount <= targetGoal.monthlyAmount &&
     targetGoal.monthlyAmount <= savingsProduct.maxMonthlyAmount;
-  const isTermValid = savingsProduct.availableTerms >= targetGoal.termMonths;
+
+  if (targetGoal.termMonths === undefined) return false;
+
+  const isTermValid = savingsProduct.availableTerms >= Number(targetGoal.termMonths);
 
   return isMonthlyAmountValid && isTermValid;
 }
