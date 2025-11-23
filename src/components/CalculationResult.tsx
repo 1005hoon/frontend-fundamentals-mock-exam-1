@@ -15,6 +15,7 @@ export function CalculationResult({ savingsGoal, selectedSavingsProduct }: Calcu
     [savingsGoal, selectedSavingsProduct]
   );
 
+  if (!selectedSavingsProduct) return <NoSavingsGoalSelected />;
   if (!calculationResult) return null;
 
   return (
@@ -54,4 +55,8 @@ export function CalculationResult({ savingsGoal, selectedSavingsProduct }: Calcu
       />
     </>
   );
+}
+
+function NoSavingsGoalSelected() {
+  return <ListRow contents={<ListRow.Texts type="1RowTypeA" top="상품을 선택해주세요." />} />;
 }

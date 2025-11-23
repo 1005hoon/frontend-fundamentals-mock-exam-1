@@ -4,6 +4,7 @@ import type { SavingsGoal } from 'domains/savingsGoal/SavingsGoal';
 import { SavingsProductItem } from './SavingsProductItem';
 import { useEffect, useMemo, useState } from 'react';
 import { fetchSavingsProducts } from 'data/savingsProducts';
+import { ListRow } from 'tosslib';
 
 interface SavingsProductsContainerProps {
   selectedSavingsProduct: SavingsProduct | null;
@@ -32,7 +33,7 @@ export function SavingsProductsContainer({
   }, []);
 
   return availableSavingsProducts.length === 0 ? (
-    <p>조건에 맞는 적금 상품이 없습니다.</p>
+    <NoAvailableProducts />
   ) : (
     availableSavingsProducts.map(product => (
       <SavingsProductItem
@@ -43,4 +44,8 @@ export function SavingsProductsContainer({
       />
     ))
   );
+}
+
+function NoAvailableProducts() {
+  return <ListRow contents={<ListRow.Texts type="1RowTypeA" top="적금 목표에 해당하는 상품이 없습니다." />} />;
 }
